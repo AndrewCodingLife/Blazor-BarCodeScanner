@@ -1,0 +1,26 @@
+﻿@page "/blazorBarcodeScanner"
+@using BlazorBarcodeScanner.ZXing.JS
+
+<BlazorBarcodeScanner.ZXing.JS.BarcodeReader
+    Title="Scan Barcode from Camera"
+    StartCameraAutomatically="false"
+    ShowStart="true"
+    ShowReset="true"
+    ShowToggleTorch = "false"
+    ShowVideoDeviceList="false"
+    VideoWidth="300"
+    VideoHeight="200"
+    OnBarcodeReceived="ReceivedBarcodeText"
+/>
+
+<input @bind-value="BarCodeText"/>
+
+@code{
+    public string BarCodeText { get; set; }
+
+    private void ReceivedBarcodeText(BarcodeReceivedEventArgs eventArgs)
+    {
+        BarCodeText = eventArgs.BarcodeText;
+        StateHasChanged();
+    }
+}

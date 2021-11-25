@@ -1,0 +1,24 @@
+﻿@page "/zxingBlazor"
+@using ZXingBlazor.Components
+
+<button @onclick="() => IsShowScanner = !IsShowScanner">Open Scanner</button>
+@if (IsShowScanner)
+{
+    <BarcodeReader ScanResult="e => { BarCodeText=e; IsShowScanner = !IsShowScanner; }"
+                   ShowScanBarcode="IsShowScanner"
+                   Close="() => IsShowScanner=!IsShowScanner"
+                   ScanBtnTitle="Scan"
+                   ResetBtnTitle="Reset"
+                   CloseBtnTitle="Close"
+                   SelectDeviceBtnTitle="Select Device" />
+
+}
+
+<br/><br /><br />
+Result: <input @bind-value="BarCodeText" />
+
+@code{
+    public string BarCodeText { get; set; }
+
+    public bool IsShowScanner { get; set; }
+}
